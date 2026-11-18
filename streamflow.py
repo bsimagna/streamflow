@@ -67,3 +67,11 @@ dates, flows = load_streamflow(
 summarize(dates, flows, sites)
 
 plot_streamflow(dates, flows, sites)
+
+threshold = float(input("Enter a flowrate threshold (cfs): "))
+print(f"\nHours above {threshold} cfs: ")
+
+for i in range(len(sites)):
+    readings_above = np.sum(flows[:, i] > threshold)
+    hours_above = readings_above * 0.25
+    print(f"{sites[i]}: {hours_above:.2f} hours")
